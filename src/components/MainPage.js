@@ -4,6 +4,24 @@ import MainPageStyle from '../MainPageStyle.css'
 import "typeface-unica-one";
 
 class MainPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleChange(event) {
+    event.preventDefault();
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state.value);
+    event.preventDefault();
+  }
 
 render(){
 const keys = Object.keys(ChampionsData)
@@ -20,15 +38,22 @@ Object.keys(champObject).forEach(key => champData.push({name: key, value: champO
    <div>
         <img alt = "champion"src={champData[6].value}/>
   </div>
-  <form>
+  <form onSubmit={this.handleSubmit}>
   <label>
-    <input type="text" name="name" placeholder="ENTER HERE"/>
+    <input value={this.state.value} onChange={this.handleChange} type="text" name="name" placeholder="ENTER HERE"/>
   </label>
+  <input className = "submit" type="submit" value="Submit" />
 </form>
 </div>
 </div>
   )
  }
+ updateInputValue(evt) {
+  this.setState({
+    inputValue: evt.target.value
+
+  });
+}
 }
 
 export default MainPage
